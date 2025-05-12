@@ -1,23 +1,49 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const rockBtn = document.createElement("button");
+rockBtn.textContent = "Rock";
+const paperBtn = document.createElement("button");
+paperBtn.textContent = "Paper";
+const scissorsBtn = document.createElement("button");
+scissorsBtn.textContent = "Scissors";
+
+const body = document.querySelector(".container");
+
+body.append(rockBtn, paperBtn, scissorsBtn);
+
+ rockBtn.addEventListener('click', () =>{
+    playRound("rock");
+  
+  });
+
+  paperBtn.addEventListener('click', () =>{
+    playRound("paper");
+    
+  });
+
+  scissorsBtn.addEventListener('click', () =>{
+    playRound("scissors");
+    
+  });
+
 function getComputerChoice() {
   let comChoice = 0; //computer choice
   comChoice = Math.floor(Math.random() * (3 - 1 + 1) + 1);
   return comChoice;
 }
 
-function getHumanChoice() {
-  let humChoice = 0; //human choice
-  humChoice = prompt("Enter your choice, Rock, Paper, Scissors");
+// function getHumanChoice() {
+//   let humChoice = 0; //human choice
+//   humChoice = prompt("Enter your choice, Rock, Paper, Scissors");
 
-  return humChoice;
-}
+//   return humChoice;
+// }
 
-function playRound(humanChoice, computerChoice) {
-  let human = humanChoice.toLowerCase();
-
-  score = 0;
+function playRound(human) {
+  // let human = humanChoice.toLowerCase();
+  let computerChoice = getComputerChoice();
+   score = 0;
 
   switch (human) {
     case "rock":
@@ -32,7 +58,6 @@ function playRound(humanChoice, computerChoice) {
     default:
       break;
   }
-
 
   if (human === 1 && computerChoice === 2) {
     console.log("Human wins, Rock beats scissors");
@@ -60,31 +85,41 @@ function playRound(humanChoice, computerChoice) {
 function playGame() {
   let score = 0;
 
-  for (let i = 0; i < 5; i++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    score = playRound(humanSelection, computerSelection);
+  //const humanSelection = getHumanChoice();
+  const computerSelection = getComputerChoice();
+  //score = playRound(humanSelection, computerSelection);
 
-    if (score === 1) {
-      humanScore++;
-    } else if (score === 2) {
-    } else {
-      computerScore++;
-    }
+ 
 
-    console.log(
-      "Human score: " + humanScore + "\nComputer Score: " + computerScore);
 
-    score = 0;
+
+  if (score === 1) {
+    humanScore++;
+  } else if (score === 2) {
+  } else {
+    computerScore++;
   }
+
+  console.log(
+    "Human score: " + humanScore + "\nComputer Score: " + computerScore
+  );
+
+  score = 0;
 
   if (humanScore > computerScore) {
     console.log("Yay you won!");
-  }else if(humanScore === computerScore){
+  } else if (humanScore === computerScore) {
     console.log("you tied? how");
-  }else{
+  } else {
     console.log("you lost.");
   }
+
 }
 
-playGame();
+
+
+
+
+
+
+
