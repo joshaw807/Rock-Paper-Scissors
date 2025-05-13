@@ -1,5 +1,6 @@
 let humanScore = 0;
 let computerScore = 0;
+let totalScore = 0;
 
 const rockBtn = document.createElement("button");
 rockBtn.textContent = "Rock";
@@ -9,10 +10,11 @@ const scissorsBtn = document.createElement("button");
 scissorsBtn.textContent = "Scissors";
 
 const scoreBoard = document.createElement("div");
+const tally = document.createElement("div");
 
 const body = document.querySelector(".container");
 
-body.append(rockBtn, paperBtn, scissorsBtn, scoreBoard);
+body.append(rockBtn, paperBtn, scissorsBtn, scoreBoard, tally);
 
 rockBtn.addEventListener("click", () => {
   playRound("rock");
@@ -84,39 +86,59 @@ function playRound(human) {
     console.log("Tie");
     score = 2;
   }
-  showScore(winner);
-  return score;
+  showScore(winner, score);
 }
 
-function showScore(winner) {
+function showScore(winner, score) {
   scoreBoard.textContent = winner;
-}
-
-function playGame() {
-  let score = 0;
-
-  //const humanSelection = getHumanChoice();
-  const computerSelection = getComputerChoice();
-  //score = playRound(humanSelection, computerSelection);
 
   if (score === 1) {
-    humanScore++;
+    ++humanScore;
   } else if (score === 2) {
   } else {
-    computerScore++;
+    ++computerScore;
   }
+  tally.textContent =
+    "Human score: " + humanScore + "\nComputer Score: " + computerScore;
 
-  console.log(
-    "Human score: " + humanScore + "\nComputer Score: " + computerScore
-  );
-
-  score = 0;
-
-  if (humanScore > computerScore) {
-    console.log("Yay you won!");
-  } else if (humanScore === computerScore) {
-    console.log("you tied? how");
-  } else {
-    console.log("you lost.");
+  if (humanScore >= 5) {
+    tally.textContent = "Yay you win!";
+     rockBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    paperBtn.disabled = true;
+  } else if (computerScore >= 5) {
+    tally.textContent = "you lost";
+    rockBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    paperBtn.disabled = true;
   }
 }
+
+// function playGame() {
+//   let score = 0;
+
+  //const humanSelection = getHumanChoice();
+  // const computerSelection = getComputerChoice();
+  //score = playRound(humanSelection, computerSelection);
+
+//   if (score === 1) {
+//     humanScore++;
+//   } else if (score === 2) {
+//   } else {
+//     computerScore++;
+//   }
+
+//   console.log(
+//     "Human score: " + humanScore + "\nComputer Score: " + computerScore
+//   );
+
+//   score = 0;
+
+//   if (humanScore > computerScore) {
+//     console.log("Yay you won!");
+//   } else if (humanScore === computerScore) {
+//     console.log("you tied? how");
+//   } else {
+//     console.log("you lost.");
+//   }
+// }
